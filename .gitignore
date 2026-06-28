@@ -1,0 +1,30 @@
+# Environments
+venv/
+env/
+.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Databases
+*.db
+*.sqlite3
+proposal_assistant.db
+data/qdrant_db/
+
+# Outputs and Generated Files
+outputs/
+*.docx
+*.pdf
+
+# IDE and Editor folders
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db

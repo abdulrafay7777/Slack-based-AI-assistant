@@ -1,0 +1,22 @@
+fastapi
+uvicorn[standard]
+slack-sdk
+
+langgraph
+langchain
+langchain-groq
+langchain-core
+sentence-transformers
+qdrant-client
+sqlalchemy
+aiosqlite
+asyncpg
+
+# Document generation
+python-docx
+
+# HTTP client (for downloading Slack files)
+httpx
+
+python-dotenv
+pydantic
