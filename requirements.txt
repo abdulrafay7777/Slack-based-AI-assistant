@@ -6,6 +6,9 @@ langgraph
 langchain
 langchain-groq
 langchain-core
+langchain-qdrant
+langchain-huggingface
+langchain-text-splitters
 sentence-transformers
 qdrant-client
 sqlalchemy

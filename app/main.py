@@ -18,7 +18,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.db.session import init_db
-from app.vector.retriever import collection_count
+from app.vector.store import collection_count
 from app.api.slack_events import router as slack_router
 
 logging.basicConfig(

@@ -1,6 +1,6 @@
 from langchain_core.tools import tool
 from typing import Optional
-from app.vector import retriever as vec
+from app.vector import retrieval as vec
 
 @tool
 async def search_proposals(
