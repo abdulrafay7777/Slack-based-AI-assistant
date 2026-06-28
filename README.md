@@ -25,7 +25,7 @@ This is a Slack-based AI assistant that helps a business consultant turn client 
    LLM_MODEL=llama-3.1-70b-versatile
    
    # Qdrant Vector DB
-   QDRANT_URL=data/qdrant_db # Local persistent by default
+   QDRANT_URL=data/qdrant_db 
    QDRANT_API_KEY= # Optional, if using managed Qdrant
    
    # Optional configurations
@@ -62,5 +62,5 @@ This is a Slack-based AI assistant that helps a business consultant turn client 
 3. Once generated, the bot will deliver the draft DOCX to Slack.
 4. You can reply with questions about the proposal/client context.
 5. You can reply with revision requests (e.g. "make the timeline section more detailed"). The system will update just that section and return a new DOCX.
-6. Reply with "approve" to finalize the proposal!ubmission.  Be ready to walk through your code and explain your decisions.
+6. Reply with "approve" to finalize the proposal submission. Be ready to walk through your code and explain your decisions.
 
