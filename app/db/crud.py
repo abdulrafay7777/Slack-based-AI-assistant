@@ -1,6 +1,6 @@
 """
 All database read/write logic lives here.
-Agents never import SQLAlchemy directly – they call these functions.
+Agents never import SQLAlchemy directly they call these functions.
 """
 from __future__ import annotations
 
@@ -11,10 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.models import Session, Message, Revision
 
 
-# ---------------------------------------------------------------------------
 # Session
-# ---------------------------------------------------------------------------
-
 async def get_session_by_user(db: AsyncSession, slack_user_id: str) -> Optional[Session]:
     result = await db.execute(
         select(Session).where(Session.slack_user_id == slack_user_id)
@@ -82,10 +79,7 @@ async def append_transcript(db: AsyncSession, session_id: str, new_text: str) ->
     return session
 
 
-# ---------------------------------------------------------------------------
 # Messages
-# ---------------------------------------------------------------------------
-
 async def add_message(
     db: AsyncSession,
     session_id: str,
@@ -108,10 +102,7 @@ async def get_messages(db: AsyncSession, session_id: str) -> List[Message]:
     return list(result.scalars().all())
 
 
-# ---------------------------------------------------------------------------
 # Revisions
-# ---------------------------------------------------------------------------
-
 async def add_revision(
     db: AsyncSession,
     session_id: str,

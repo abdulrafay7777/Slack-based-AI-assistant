@@ -24,3 +24,4 @@ async def search_proposals(
     top_k = min(top_k, 2)
     chunks = await vec.search(query=query, top_k=top_k, industry_filter=industry)
     return chunks
+    

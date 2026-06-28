@@ -101,9 +101,7 @@ async def writer_agent(state: ProposalState) -> dict[str, Any]:
         api_key=os.getenv("GROQ_API_KEY"),
     )
 
-    # ------------------------------------------------------------------
     # MODE 1: Targeted revision
-    # ------------------------------------------------------------------
     if revision_request and existing_sections:
         messages = [
             SystemMessage(content=_REVISION_SYSTEM_PROMPT),
@@ -140,9 +138,7 @@ async def writer_agent(state: ProposalState) -> dict[str, Any]:
             "error": None,
         }
 
-    # ------------------------------------------------------------------
     # MODE 2: Full generation
-    # ------------------------------------------------------------------
     context_text = _format_context(retrieved_chunks)
 
     user_content = (

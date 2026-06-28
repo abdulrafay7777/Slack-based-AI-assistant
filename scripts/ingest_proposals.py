@@ -232,7 +232,7 @@ async def ingest_all() -> None:
     for f in files:
         total += await ingest_file(f)
 
-    print(f"\n✅ Ingestion complete. Total chunks: {total}")
+    print(f"\n Ingestion complete. Total chunks: {total}")
 
 
 if __name__ == "__main__":

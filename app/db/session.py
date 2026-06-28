@@ -11,7 +11,7 @@ engine = create_async_engine(
     DATABASE_URL,
     echo=False,
     future=True,
-    # For SQLite only – not needed for Postgres
+    # For SQLite 
     connect_args={"check_same_thread": False} if "sqlite" in DATABASE_URL else {},
 )
 
@@ -31,7 +31,7 @@ async def init_db() -> None:
 
 
 async def get_db() -> AsyncSession:
-    """FastAPI dependency – yields an async session."""
+    """FastAPI dependency yields an async session."""
     async with AsyncSessionLocal() as session:
         try:
             yield session

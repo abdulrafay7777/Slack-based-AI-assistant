@@ -19,10 +19,7 @@ from docx.oxml import OxmlElement
 
 OUTPUT_DIR = Path(os.getenv("DOCX_OUTPUT_DIR", "outputs"))
 
-
-
-BRAND_COLOR = RGBColor(0x1F, 0x49, 0x7D)   # deep navy
-
+BRAND_COLOR = RGBColor(0x1F, 0x49, 0x7D)
 
 def _set_heading_style(paragraph, level: int = 1) -> None:
     """Apply brand heading style to a paragraph."""

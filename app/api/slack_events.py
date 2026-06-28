@@ -94,7 +94,7 @@ async def _run_full_pipeline(
     transcript: str,
 ) -> None:
     """Run intake → research → writer and deliver DOCX to Slack."""
-    await _post_message(slack_channel_id, "⏳ Processing your transcript… this takes about 30 seconds.")
+    await _post_message(slack_channel_id, " Processing your transcript… this takes about 30 seconds.")
 
     async with AsyncSessionLocal() as db:
         # Append transcript to session (handles multi-upload)
@@ -127,7 +127,7 @@ async def _run_full_pipeline(
     final_state = await proposal_graph.ainvoke(initial_state)
 
     if final_state.get("error"):
-        await _post_message(slack_channel_id, f"❌ Error: {final_state['error']}")
+        await _post_message(slack_channel_id, f" Error: {final_state['error']}")
         return
 
     # Persist results
@@ -152,7 +152,7 @@ async def _run_full_pipeline(
     if missing:
         await _post_message(
             slack_channel_id,
-            f"⚠️ The transcript was missing information for: *{', '.join(missing)}*. "
+            f" The transcript was missing information for: *{', '.join(missing)}*. "
             "I've done my best without them, but providing these will strengthen the proposal."
         )
 
@@ -163,10 +163,10 @@ async def _run_full_pipeline(
             channel=slack_channel_id,
             docx_path=docx_path,
             filename=f"proposal_{session_id[:8]}_draft.docx",
-            comment="✅ Your draft proposal is ready! Reply to request changes, ask questions, or say 'approve' to finalize delivery.",
+            comment=" Your draft proposal is ready! Reply to request changes, ask questions, or say 'approve' to finalize delivery.",
         )
     else:
-        await _post_message(slack_channel_id, "⚠️ Proposal text generated but DOCX creation failed.")
+        await _post_message(slack_channel_id, " Proposal text generated but DOCX creation failed.")
 
 
 async def _run_revision(
@@ -177,12 +177,12 @@ async def _run_revision(
     target_section: str | None,
 ) -> None:
     """Run a targeted revision and deliver updated DOCX."""
-    await _post_message(slack_channel_id, "✏️ Revising the proposal…")
+    await _post_message(slack_channel_id, " Revising the proposal…")
 
     async with AsyncSessionLocal() as db:
         session = await crud.get_session_by_user(db, slack_user_id)
         if not session or not session.proposal_sections:
-            await _post_message(slack_channel_id, "❌ No existing proposal found. Please upload a transcript first.")
+            await _post_message(slack_channel_id, " No existing proposal found. Please upload a transcript first.")
             return
         revision_count = (session.revision_count or 0) + 1
 
@@ -210,7 +210,7 @@ async def _run_revision(
     final_state = await revision_graph.ainvoke(initial_state)
 
     if final_state.get("error"):
-        await _post_message(slack_channel_id, f"❌ Revision error: {final_state['error']}")
+        await _post_message(slack_channel_id, f" Revision error: {final_state['error']}")
         return
 
     async with AsyncSessionLocal() as db:
@@ -236,7 +236,7 @@ async def _run_revision(
             channel=slack_channel_id,
             docx_path=docx_path,
             filename=f"proposal_{session_id[:8]}_rev{revision_count}.docx",
-            comment=f"✅ Revision {revision_count} complete! Section updated: *{target_section or 'inferred from request'}*.",
+            comment=f" Revision {revision_count} complete! Section updated: *{target_section or 'inferred from request'}*.",
         )
 
 
@@ -337,7 +337,7 @@ async def slack_events(request: Request, background_tasks: BackgroundTasks) -> R
             async with AsyncSessionLocal() as db:
                 session, created = await crud.get_or_create_session(db, user_id, channel_id)
             if created:
-                await _post_message(channel_id, f"👋 New session started for <@{user_id}>!")
+                await _post_message(channel_id, f" New session started for <@{user_id}>!")
 
             for file_info in txt_files:
                 url = file_info.get("url_private_download") or file_info.get("url_private")
@@ -376,7 +376,7 @@ async def slack_events(request: Request, background_tasks: BackgroundTasks) -> R
 
         if text.lower() == "approve":
             background_tasks.add_task(
-                _post_message, channel_id, "🎉 Proposal approved! The final version is ready for client delivery."
+                _post_message, channel_id, " Proposal approved! The final version is ready for client delivery."
             )
         elif is_revision and session.proposal_sections:
             background_tasks.add_task(

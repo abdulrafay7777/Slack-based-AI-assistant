@@ -1,5 +1,5 @@
 """
-Agent 2 – Research
+Agent 2 - Research
 
 Uses LangGraph's create_react_agent so the LLM decides:
   - what to search for
